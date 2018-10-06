@@ -38,6 +38,7 @@ class HotelApp extends StatelessWidget {
   }
 
   Route<dynamic> _getRoute(RouteSettings setting) {
+    if (setting.name != 'home') { return null;}
     return MaterialPageRoute<void> (
       settings: setting,
       builder: (BuildContext context) => HomePage(),
