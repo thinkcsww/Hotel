@@ -4,6 +4,7 @@ import 'search.dart';
 import 'favorite_hotel.dart';
 import 'ranking.dart';
 import 'mypage.dart';
+import 'detail.dart';
 
 
 class HotelApp extends StatelessWidget {
@@ -33,6 +34,7 @@ class HotelApp extends StatelessWidget {
         '/ranking': (context) => RankingPage(),
         '/favorite_hotel': (context) => FavoriteHotelPage(),
         '/my_page': (context) => MyPage(),
+        '/detail': (context) => DetailPage(),
       },
     );
   }

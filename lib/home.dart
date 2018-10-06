@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'search.dart';
 import 'model/hotel.dart';
 import 'model/hotels_repository.dart';
+import 'detail.dart';
 
 
 
 class HomePage extends StatelessWidget {
-
   Color iconColor = Colors.blue.shade200;
 
-  List<Icon> _buildStars(int num) {
+
+  List<Icon> buildStars(int num, double size) {
 
     List<Icon> stars = List<Icon>();
     for (int i = 0; i < num; i++) {
-      stars.add(Icon(Icons.star, color: Colors.yellow, size: 10.0));
+      stars.add(Icon(Icons.star, color: Colors.yellow, size: size));
     }
     return stars;
 
@@ -36,12 +35,16 @@ class HomePage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            AspectRatio(
-              aspectRatio: 18 / 11,
-              child: Image.network(
-              hotel.imageAddress,
-              fit: BoxFit.fill,)
-            ),
+              AspectRatio(
+                aspectRatio: 18 / 11,
+                child: Container(
+                  width: 100.0,
+                  child: Hero(
+                      tag: hotel.imageAddress,
+                      child: Image.network(hotel.imageAddress, fit: BoxFit.fill,)
+                  ),
+                ),
+              ),
             Row(
               children: <Widget>[
                 Padding(
@@ -56,15 +59,15 @@ class HomePage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Container(
-                          alignment: Alignment.centerLeft,
+                          alignment: Alignment.centerRight,
                           child: Row(
-                            children: _buildStars(hotel.star),
+                            children: buildStars(hotel.star, 10.0),
                           ),
                         ),
                         Text(
                           hotel.name,
                           textAlign: TextAlign.left,
-                          style: TextStyle(fontWeight:FontWeight.bold, fontSize: 15.0),
+                          style: TextStyle(fontWeight:FontWeight.bold, fontSize: 10.0),
                           maxLines: 1,
                         ),
                         SizedBox(height: 8.0,),
@@ -81,12 +84,18 @@ class HomePage extends StatelessWidget {
                 ),
               ],
             ),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 FlatButton(
                   onPressed: (){
-                    
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DetailPage(hotel: hotel,),
+                        ),
+                    );
                   },
                   child: Text('more', style: TextStyle(color: Colors.blue,))
                 ),
@@ -107,6 +116,8 @@ class HomePage extends StatelessWidget {
       },
     );
   }
+  
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -165,3 +176,4 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+

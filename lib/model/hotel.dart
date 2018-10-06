@@ -7,12 +7,14 @@ class Hotel {
     @required this.address,
     @required this.star,
     @required this.imageAddress,
-    @required this.explain
+    @required this.explain,
+    @required this.phoneNumber,
   }) :  assert(id != null),
         assert(name != null),
         assert(address != null),
         assert(imageAddress != null),
         assert(explain != null),
+        assert(phoneNumber != null),
         assert(star != null);
 
 
@@ -22,6 +24,7 @@ class Hotel {
   final String imageAddress;
   final String explain;
   final int star;
+  final String phoneNumber;
 
 
   @override
