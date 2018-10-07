@@ -139,7 +139,7 @@ class HomePage extends StatelessWidget {
               semanticLabel: 'tune',
             ),
             onPressed: () {
-
+              Navigator.pushNamed(context, '/language');
             },
           )
         ],

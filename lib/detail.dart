@@ -7,9 +7,9 @@ import 'dart:async';
 
 class DetailPage extends StatefulWidget {
   final Hotel hotel;
-  final Color textColor = Colors.blue.shade500;
-
   DetailPage({Key key, @required this.hotel}) : super(key: key);
+
+  final Color textColor = Colors.blue.shade500;
   @override
   _DetailPageState createState() => _DetailPageState(hotel: hotel);
 }
