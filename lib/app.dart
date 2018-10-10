@@ -4,8 +4,9 @@ import 'search.dart';
 import 'favorite_hotel.dart';
 import 'ranking.dart';
 import 'mypage.dart';
-import 'detail.dart';
 import 'language.dart';
+import 'localizationdel.dart';
+import 'package:flutter\_localizations/flutter\_localizations.dart';
 
 
 class HotelApp extends StatelessWidget {
@@ -24,6 +25,25 @@ class HotelApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+
+      supportedLocales: [
+        const Locale('ko', 'KR'),
+        const Locale('en', 'US')
+      ],
+      localizationsDelegates: [
+        const DemoLocalizationsDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate
+      ],
+      localeResolutionCallback: (Locale locale, Iterable<Locale> supportedLocales) {
+        for (Locale supportedLocale in supportedLocales) {
+          if (supportedLocale.languageCode == locale.languageCode || supportedLocale.countryCode == locale.countryCode) {
+            return supportedLocale;
+          }
+        }
+
+        return supportedLocales.first;
+      },
       title: 'Hotel',
       home: HomePage(),
 //      theme: kDefaultTheme,
@@ -35,7 +55,6 @@ class HotelApp extends StatelessWidget {
         '/ranking': (context) => RankingPage(),
         '/favorite_hotel': (context) => FavoriteHotelPage(),
         '/my_page': (context) => MyPage(),
-        '/detail': (context) => DetailPage(),
         '/language': (context) => LanguagePage(),
       },
     );

@@ -79,12 +79,9 @@ class _DetailPageState extends State<DetailPage> {
           children: <Widget>[
             Stack(
               children: <Widget>[
-                Container(
-                    height: MediaQuery.of(context).size.height / 2.5,
-                    width: MediaQuery.of(context).size.width,
-                    child: Hero(
-                        tag: hotel.imageAddress,
-                        child: Image.network(hotel.imageAddress, fit: BoxFit.fill,))
+                Hero(
+                    tag: hotel.imageAddress,
+                    child: Image.network(hotel.imageAddress, fit: BoxFit.fill,)
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,

@@ -37,12 +37,9 @@ class HomePage extends StatelessWidget {
           children: <Widget>[
               AspectRatio(
                 aspectRatio: 18 / 11,
-                child: Container(
-                  width: 100.0,
-                  child: Hero(
-                      tag: hotel.imageAddress,
-                      child: Image.network(hotel.imageAddress, fit: BoxFit.fill,)
-                  ),
+                child: Hero(
+                    tag: hotel.imageAddress,
+                    child: Image.network(hotel.imageAddress, fit: BoxFit.fitWidth,)
                 ),
               ),
             Row(
@@ -157,12 +154,9 @@ class HomePage extends StatelessWidget {
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
-            DrawerHeader(
-              padding: EdgeInsets.fromLTRB(20.0, 120.0, 0.0, 0.0),
-              child: Text('Pages', style: TextStyle(color: Colors.white, fontSize: 22.0),),
-              decoration: BoxDecoration(
-                color: Colors.blue
-              ),
+            UserAccountsDrawerHeader(
+              accountEmail: null,
+              accountName: Text('Pages', style: TextStyle(fontSize: 20.0),),
             ),
             makeDrawerListTile('Home', Icon(Icons.home, color: iconColor,), context, '/home'),
             makeDrawerListTile('Search', Icon(Icons.search, color: iconColor,), context, '/search'),

@@ -1,60 +1,60 @@
 /// Bar chart example
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
-import 'package:flutter_sparkline/flutter_sparkline.dart';
 
 class RankingPage extends StatelessWidget {
 
-  var data = [0.0, 1.0, 1.5, 2.0, 0.0, 0.0, -0.5, -1.0, -0.5, 0.0, 0.0];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Ranking'),
+    var data = [
+      new ClicksPerYear('2016', 5, Colors.red),
+      new ClicksPerYear('2017', 2, Colors.yellow),
+      new ClicksPerYear('2018', 3, Colors.green),
+    ];
+    var series = [
+      new charts.Series(
+        domainFn: (ClicksPerYear rankData, _) => rankData.year,
+        measureFn: (ClicksPerYear rankData, _) => rankData.rank,
+        colorFn: (ClicksPerYear rankData, _) => rankData.color,
+        id: 'Ranks',
+        data: data,
       ),
-      body: Row(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: 200.0,),
-                Text('10000\$'),
-                SizedBox(height: 10.0,),
-                Text('7000\$'),
-                SizedBox(height: 10.0,),
-                Text('5000\$'),
-                SizedBox(height: 10.0,),
-                Text('3000\$'),
-                SizedBox(height: 10.0,),
-                Text('1000\$'),
-              ],
-            ),
-          ),
-          Center(
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: 200.0,),
-                Center(
-                  child: Container(
-                    width: 300.0,
-                    height: 150.0,
-                    child: Sparkline(
-                      data: data,
-                      fillMode: FillMode.below,
-                      fillColor: Colors.red[200]
-                    )
-                  ),
-                ),
-                SizedBox(height: 20.0,),
-                Text('Burj Al Arab, Dubai\'s profit ')
+    ];
+    var chart = new charts.BarChart(
+      series,
+      animate: true,
+    );
+    var chartWidget = new Padding(
+      padding: new EdgeInsets.all(32.0),
+      child: new SizedBox(
+        height: 200.0,
+        child: chart,
+      ),
+    );
 
-              ],
-            ),
-          ),
-        ],
+    return new Scaffold(
+      appBar: AppBar(
+        title: Text('World Rank'),
+      ),
+      body: new Center(
+        child: new Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            chartWidget,
+          ],
+        ),
       ),
     );
   }
+}
+
+class ClicksPerYear {
+  final String year;
+  final int rank;
+  final charts.Color color;
+
+  ClicksPerYear(this.year, this.rank, Color color)
+      : this.color = new charts.Color(
+      r: color.red, g: color.green, b: color.blue, a: color.alpha);
 }
